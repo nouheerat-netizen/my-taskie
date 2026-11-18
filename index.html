@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskie! — Your Happy Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a href="#" class="logo">
+        <span class="logo-icon">✿</span>
+        <span>Taskie!</span>
+      </a>
+
+      <p class="side-label">MENU</p>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="all">
+          <span>▦</span> Dashboard
+        </button>
+        <button class="nav-item" data-view="pending">
+          <span>◷</span> My Tasks
+        </button>
+        <button class="nav-item" data-view="completed">
+          <span>✓</span> Completed
+        </button>
+      </nav>
+
+      <p class="side-label">CATEGORIES</p>
+      <div class="category-menu">
+        <button class="category-btn" data-category="Study">
+          <span class="category-dot study"></span> Study
+        </button>
+        <button class="category-btn" data-category="Personal">
+          <span class="category-dot personal"></span> Personal
+        </button>
+        <button class="category-btn" data-category="Work">
+          <span class="category-dot work"></span> Work
+        </button>
+        <button class="category-btn" data-category="Other">
+          <span class="category-dot other"></span> Other
+        </button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="mini-note">
+          <span>✨</span>
+          <p>Small steps every day lead to big achievements!</p>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <span id="themeIcon">☾</span>
+          <span id="themeText">Dark mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="date-label" id="todayDate">YOUR PLANNER</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <span class="welcome-tag">✨ Make today count!</span>
+        </div>
+      </header>
+
+      <section class="welcome-banner">
+        <div>
+          <span class="banner-label">YOUR HAPPY SPACE</span>
+          <h2>Make today<br>something amazing!</h2>
+          <p>Plan your day, complete your tasks, and celebrate every little win.</p>
+          <a href="#taskForm" class="banner-btn">+ Add a task</a>
+        </div>
+        <div class="banner-art" aria-hidden="true">
+          <div class="art-circle">✿</div>
+          <span class="sparkle sparkle-one">✦</span>
+          <span class="sparkle sparkle-two">✧</span>
+          <span class="sparkle sparkle-three">♡</span>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-icon icon-purple">▤</div>
+          <p>Total tasks</p>
+          <h2 id="totalTasks">0</h2>
+          <span>All your plans</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-orange">◷</div>
+          <p>Pending</p>
+          <h2 id="pendingTasks">0</h2>
+          <span>Still to do</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon icon-green">✓</div>
+          <p>Completed</p>
+          <h2 id="completedTasks">0</h2>
+          <span>Great job!</span>
+        </article>
+      </section>
+
+      <section class="progress-card">
+        <div class="progress-info">
+          <div>
+            <span class="section-kicker">YOUR PROGRESS</span>
+            <h3>Daily productivity</h3>
+            <p id="progressMessage">Every task completed is a little victory!</p>
+          </div>
+          <strong id="progressPercent">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </section>
+
+      <section class="task-section" id="taskForm">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">LET'S GET THINGS DONE</span>
+            <h2>Add a new task</h2>
+          </div>
+        </div>
+
+        <form id="addTaskForm" class="task-form">
+          <input id="taskInput" type="text" placeholder="What do you need to do?" maxlength="100" required>
+          <select id="taskCategory">
+            <option value="Study">📚 Study</option>
+            <option value="Personal">🌷 Personal</option>
+            <option value="Work">💼 Work</option>
+            <option value="Other">✨ Other</option>
+          </select>
+          <select id="taskPriority">
+            <option value="Low">Low priority</option>
+            <option value="Medium" selected>Medium priority</option>
+            <option value="High">High priority</option>
+          </select>
+          <input id="taskDueDate" type="date" aria-label="Due date">
+          <button type="submit" class="add-btn">+ Add Task</button>
+        </form>
+      </section>
+
+      <section class="task-section task-list-section">
+        <div class="section-heading task-heading">
+          <div>
+            <span class="section-kicker">YOUR TO-DO LIST</span>
+            <h2 id="listTitle">Your tasks</h2>
+          </div>
+          <span class="task-count" id="taskCount">0 tasks</span>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="completed">Completed</button>
+        </div>
+
+        <div class="task-list" id="taskList"></div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🌸</div>
+          <h3>Nothing here yet!</h3>
+          <p>Add a task and make your day productive.</p>
+        </div>
+      </section>
+
+      <footer>
+        Made with <span>♥</span> and a little productivity magic · Taskie! 2026
+      </footer>
+    </main>
+  </div>
+
+  <div class="theme-picker" id="themePicker">
+    <button class="palette-toggle" id="paletteToggle" aria-label="Choose colour theme">🎨</button>
+    <div class="palette-panel" id="palettePanel">
+      <h3>Choose your theme</h3>
+      <button data-theme="sunset"><i class="swatch sunset-swatch"></i> Sunset Peach</button>
+      <button data-theme="lavender"><i class="swatch lavender-swatch"></i> Lavender Dream</button>
+      <button data-theme="mint"><i class="swatch mint-swatch"></i> Mint Fresh</button>
+      <button data-theme="ocean"><i class="swatch ocean-swatch"></i> Ocean Breeze</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="editModal">
+    <div class="edit-modal">
+      <button class="modal-close" id="closeEdit">×</button>
+      <span class="section-kicker">MAKE A CHANGE</span>
+      <h2>Edit your task</h2>
+      <form id="editTaskForm">
+        <label for="editTaskInput">Task name</label>
+        <input id="editTaskInput" type="text" maxlength="100" required>
+
+        <label for="editTaskCategory">Category</label>
+        <select id="editTaskCategory">
+          <option value="Study">Study</option>
+          <option value="Personal">Personal</option>
+          <option value="Work">Work</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="editTaskPriority">Priority</label>
+        <select id="editTaskPriority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+
+        <label for="editTaskDueDate">Due date</label>
+        <input id="editTaskDueDate" type="date">
+
+        <button class="add-btn save-btn" type="submit">Save changes</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</body>
+</html>
